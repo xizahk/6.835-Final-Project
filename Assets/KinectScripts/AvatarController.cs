@@ -291,7 +291,6 @@ public class AvatarController : MonoBehaviour
 		Vector3 trans = bodyRoot.localPosition;
 		trans += (tiltLeft) ? new Vector3(-10f, 0, 0) : new Vector3(0, 0, 0);
 		trans += (tiltRight) ? new Vector3(10f, 0, 0) : new Vector3(0, 0, 0);
-		Debug.Log(trans);
 
 		Vector3 targetPos = Kinect2AvatarPos(trans, verticalMovement);
 

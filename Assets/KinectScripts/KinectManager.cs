@@ -79,7 +79,7 @@ public class KinectManager : MonoBehaviour
 	public List<KinectGestures.Gestures> Player2Gestures;
 	
 	// Minimum time between gesture detections
-	public float MinTimeBetweenGestures = 0.7f;
+	public float MinTimeBetweenGestures = 0.1f;
 	
 	// List of Gesture Listeners. They must implement KinectGestures.GestureListenerInterface
 	public List<MonoBehaviour> GestureListeners;
