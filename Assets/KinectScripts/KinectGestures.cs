@@ -56,7 +56,7 @@ public class KinectGestures
 		Pull,
 		TiltLeft,
 		TiltRight,
-		Flap,
+		Flap
 	}
 	
 	
@@ -496,26 +496,23 @@ public class KinectGestures
 				switch (gestureData.state)
 				{
 					case 0: // gesture detection
-						Debug.Log("Flap 0");
 						if (jointsTracked[rightHandIndex] && jointsTracked[rightShoulderIndex] &&
-							jointsPos[rightHandIndex].y - jointsPos[rightShoulderIndex].y > 0.1f &&
+							jointsPos[rightHandIndex].y - jointsPos[rightShoulderIndex].y > 0.3f &&
 							jointsTracked[leftHandIndex] && jointsTracked[leftShoulderIndex] &&
-							jointsPos[leftHandIndex].y - jointsPos[leftShoulderIndex].y > 0.1f)
-							Debug.Log("1 success");
+							jointsPos[leftHandIndex].y - jointsPos[leftShoulderIndex].y > 0.3f)
 						{
 							SetGestureJoint(ref gestureData, timestamp, rightHandIndex, jointsPos[rightHandIndex]);
 							gestureData.progress = 0.3f;
 						}
 						break;
 					case 1: // gesture - phase 2
-						Debug.Log("Flap 1");
 						if ((timestamp - gestureData.timestamp) < 1.5f)
 						{
 							bool isInPose =
 								jointsTracked[rightHandIndex] && jointsTracked[rightShoulderIndex] &&
-								jointsPos[rightShoulderIndex].y - jointsPos[rightHandIndex].y > 0.2f &&
+								jointsPos[rightShoulderIndex].y - jointsPos[rightHandIndex].y > 0.4f &&
 								jointsTracked[leftHandIndex] && jointsTracked[leftShoulderIndex] &&
-								jointsPos[leftShoulderIndex].y - jointsPos[leftHandIndex].y > 0.2f;
+								jointsPos[leftShoulderIndex].y - jointsPos[leftHandIndex].y > 0.4f;
 							if (isInPose)
 							{
 								gestureData.timestamp = timestamp;
@@ -530,14 +527,13 @@ public class KinectGestures
 						}
 						break;
 					case 2: // gesture complete
-						Debug.Log("Flap 2");
 						if ((timestamp - gestureData.timestamp) < 1.5f)
 						{
 							bool isInPose =
 								jointsTracked[rightHandIndex] && jointsTracked[rightShoulderIndex] &&
-								jointsPos[rightShoulderIndex].y - jointsPos[rightHandIndex].y > 0.2f &&
+								jointsPos[rightShoulderIndex].y - jointsPos[rightHandIndex].y > 0.4f &&
 								jointsTracked[leftHandIndex] && jointsTracked[leftShoulderIndex] &&
-								jointsPos[leftShoulderIndex].y - jointsPos[leftHandIndex].y > 0.2f;
+								jointsPos[leftShoulderIndex].y - jointsPos[leftHandIndex].y > 0.4f;
 
 							if (isInPose)
 							{
@@ -555,9 +551,8 @@ public class KinectGestures
 				break;
 			// check for Click
 			case Gestures.Click:
-				switch(gestureData.state)
+				switch (gestureData.state)
 				{
-					// TODO: Un-false these in the future
 					case 0:  // gesture detection - phase 1
 						if(jointsTracked[rightHandIndex] && jointsTracked[rightElbowIndex] &&
 					       (jointsPos[rightHandIndex].y - jointsPos[rightElbowIndex].y) > -0.1f)

@@ -23,7 +23,7 @@ public class SimpleGestureListener : MonoBehaviour, KinectGestures.GestureListen
 		//manager.DeleteGesture(userId, KinectGestures.Gestures.Wave);
 		manager.DetectGesture(userId, KinectGestures.Gestures.TiltLeft);
 		manager.DetectGesture(userId, KinectGestures.Gestures.TiltRight);
-		manager.DeleteGesture(userId, KinectGestures.Gestures.Flap);
+		manager.DetectGesture(userId, KinectGestures.Gestures.Flap);
 
 		//		manager.DetectGesture(userId, KinectGestures.Gestures.Push);
 		//		manager.DetectGesture(userId, KinectGestures.Gestures.Pull);
