@@ -257,6 +257,7 @@ public class AvatarController : MonoBehaviour
 
 		bool tiltLeft = kinectManager.isTiltLeft();
 		bool tiltRight = kinectManager.isTiltRight();
+		bool flap = kinectManager.isFlap();
 
 		//// If this is the first time we're moving the avatar, set the offset. Otherwise ignore it.
 		//if (!offsetCalibrated)
@@ -287,10 +288,21 @@ public class AvatarController : MonoBehaviour
 		//}
 
 		// Smoothly transition to the new position
-
+		// Move the avatar left, right, up, or down depending on whether tilt and/or flapping gestures are captured
 		Vector3 trans = bodyRoot.localPosition;
-		trans += (tiltLeft) ? new Vector3(-10f, 0, 0) : new Vector3(0, 0, 0);
-		trans += (tiltRight) ? new Vector3(10f, 0, 0) : new Vector3(0, 0, 0);
+		trans += (tiltLeft) ? new Vector3(-Constants.CHARACTER_TILT_SPEED, 0, 0) : new Vector3(0, 0, 0);
+		trans += (tiltRight) ? new Vector3(Constants.CHARACTER_TILT_SPEED, 0, 0) : new Vector3(0, 0, 0);
+		float deltaY = 0;
+		if (!flap && trans[1] > 0)
+		{
+			// Make player fall down slowly
+			deltaY = -Math.Min(trans[1], Constants.CHARACTER_FALL_SPEED * Time.deltaTime);
+		} 
+		else if (flap && trans[1] < Constants.CHARACTER_MAX_HEIGHT)
+		{
+			deltaY = Constants.CHARACTER_FLAP_SPEED;
+		}
+		trans += new Vector3(0, deltaY, 0);
 
 		Vector3 targetPos = Kinect2AvatarPos(trans, verticalMovement);
 

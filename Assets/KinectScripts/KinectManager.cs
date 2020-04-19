@@ -187,9 +187,10 @@ public class KinectManager : MonoBehaviour
 	private BoneOrientationsConstraint boneConstraintsFilter;
 	private SelfIntersectionConstraint selfIntersectionConstraint;
 
-	// States of avatar
+	// States of avatar, each variable corresponds to a movement in the horizontal or vertical direction
 	private bool tiltLeft;
 	private bool tiltRight;
+	private bool flap;
 	
 	// Returns whether the player is tilting left
 	public bool isTiltLeft()
@@ -212,6 +213,17 @@ public class KinectManager : MonoBehaviour
 		}
 		return false;
 	}
+
+	// Returns whether the player is flapping up
+	public bool isFlap()
+    {
+		if (flap)
+        {
+			flap = false;
+			return true;
+        }
+		return false;
+    }
 
 	// returns the single KinectManager instance
 	public static KinectManager Instance
@@ -1189,6 +1201,10 @@ public class KinectManager : MonoBehaviour
 						{
 							tiltRight = true;
 						}
+						else if (gestureData.gesture == KinectGestures.Gestures.Flap)
+                        {
+							flap = true;
+                        }
 						foreach(KinectGestures.GestureListenerInterface listener in gestureListeners)
 						{
 							if(listener.GestureCompleted(Player1ID, 0, gestureData.gesture, 
