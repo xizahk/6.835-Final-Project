@@ -1177,6 +1177,7 @@ public class KinectManager : MonoBehaviour
 				{
 					//if(controller.Active)
 					{
+						Debug.Log(Player1Avatars.Count);
 						controller.UpdateAvatar(Player1ID);
 					}
 				}
