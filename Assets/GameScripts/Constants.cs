@@ -15,4 +15,9 @@ public class Constants : MonoBehaviour
     public const float CHARACTER_TILT_SPEED = 10;
     public const float CHARACTER_FLAP_SPEED = 30;
     public const float CHARACTER_FALL_SPEED = 20;
+
+    // UI TEXT
+    public static readonly string PlayerTag = "Player";
+    public static readonly string StatusFlapToStart = "Flap to start";
+    public static readonly string StatusDeadFlapToStart = "Dead. Flap to start";
 }
