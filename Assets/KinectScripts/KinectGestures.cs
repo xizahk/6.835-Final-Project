@@ -444,6 +444,63 @@ public class KinectGestures
 						break;
 				}
 				break;
+			case Gestures.Flap:
+				switch (gestureData.state)
+				{
+					case 0: // gesture detection
+						if (jointsTracked[rightHandIndex] && jointsTracked[rightShoulderIndex] &&
+							jointsPos[rightHandIndex].y - jointsPos[rightShoulderIndex].y > Constants.FLAP_UP &&
+							jointsTracked[leftHandIndex] && jointsTracked[leftShoulderIndex] &&
+							jointsPos[leftHandIndex].y - jointsPos[leftShoulderIndex].y > Constants.FLAP_UP)
+						{
+							SetGestureJoint(ref gestureData, timestamp, rightHandIndex, jointsPos[rightHandIndex]);
+							gestureData.progress = 0.3f;
+						}
+						break;
+					case 1: // gesture - phase 2
+						if ((timestamp - gestureData.timestamp) < 1.5f)
+						{
+							bool isInPose =
+								jointsTracked[rightHandIndex] && jointsTracked[rightShoulderIndex] &&
+								jointsPos[rightShoulderIndex].y - jointsPos[rightHandIndex].y > Constants.FLAP_DOWN &&
+								jointsTracked[leftHandIndex] && jointsTracked[leftShoulderIndex] &&
+								jointsPos[leftShoulderIndex].y - jointsPos[leftHandIndex].y > Constants.FLAP_DOWN;
+							if (isInPose)
+							{
+								gestureData.timestamp = timestamp;
+								gestureData.state++;
+								gestureData.progress = 0.7f;
+							}
+						}
+						else
+						{
+							// cancel the gesture
+							SetGestureCancelled(ref gestureData);
+						}
+						break;
+					case 2: // gesture complete
+						if ((timestamp - gestureData.timestamp) < 1.5f)
+						{
+							bool isInPose =
+								jointsTracked[rightHandIndex] && jointsTracked[rightShoulderIndex] &&
+								jointsPos[rightShoulderIndex].y - jointsPos[rightHandIndex].y > Constants.FLAP_DOWN &&
+								jointsTracked[leftHandIndex] && jointsTracked[leftShoulderIndex] &&
+								jointsPos[leftShoulderIndex].y - jointsPos[leftHandIndex].y > Constants.FLAP_DOWN;
+
+							if (isInPose)
+							{
+								Vector3 jointPos = jointsPos[gestureData.joint];
+								CheckPoseComplete(ref gestureData, timestamp, jointPos, isInPose, KinectWrapper.Constants.ZeroDuration);
+							}
+						}
+						else
+						{
+							// cancel the gesture
+							SetGestureCancelled(ref gestureData);
+						}
+						break;
+				}
+				break;
 			case Gestures.TiltLeft:
 				switch (gestureData.state)
 				{
@@ -492,63 +549,7 @@ public class KinectGestures
 						break;
 				}
 				break;
-			case Gestures.Flap:
-				switch (gestureData.state)
-				{
-					case 0: // gesture detection
-						if (jointsTracked[rightHandIndex] && jointsTracked[rightShoulderIndex] &&
-							jointsPos[rightHandIndex].y - jointsPos[rightShoulderIndex].y > 0.3f &&
-							jointsTracked[leftHandIndex] && jointsTracked[leftShoulderIndex] &&
-							jointsPos[leftHandIndex].y - jointsPos[leftShoulderIndex].y > 0.3f)
-						{
-							SetGestureJoint(ref gestureData, timestamp, rightHandIndex, jointsPos[rightHandIndex]);
-							gestureData.progress = 0.3f;
-						}
-						break;
-					case 1: // gesture - phase 2
-						if ((timestamp - gestureData.timestamp) < 1.5f)
-						{
-							bool isInPose =
-								jointsTracked[rightHandIndex] && jointsTracked[rightShoulderIndex] &&
-								jointsPos[rightShoulderIndex].y - jointsPos[rightHandIndex].y > 0.4f &&
-								jointsTracked[leftHandIndex] && jointsTracked[leftShoulderIndex] &&
-								jointsPos[leftShoulderIndex].y - jointsPos[leftHandIndex].y > 0.4f;
-							if (isInPose)
-							{
-								gestureData.timestamp = timestamp;
-								gestureData.state++;
-								gestureData.progress = 0.7f;
-							}
-						}
-						else
-						{
-							// cancel the gesture
-							SetGestureCancelled(ref gestureData);
-						}
-						break;
-					case 2: // gesture complete
-						if ((timestamp - gestureData.timestamp) < 1.5f)
-						{
-							bool isInPose =
-								jointsTracked[rightHandIndex] && jointsTracked[rightShoulderIndex] &&
-								jointsPos[rightShoulderIndex].y - jointsPos[rightHandIndex].y > 0.4f &&
-								jointsTracked[leftHandIndex] && jointsTracked[leftShoulderIndex] &&
-								jointsPos[leftShoulderIndex].y - jointsPos[leftHandIndex].y > 0.4f;
-
-							if (isInPose)
-							{
-								Vector3 jointPos = jointsPos[gestureData.joint];
-								CheckPoseComplete(ref gestureData, timestamp, jointPos, isInPose, KinectWrapper.Constants.ZeroDuration);
-							}
-						}
-						else
-						{
-							// cancel the gesture
-							SetGestureCancelled(ref gestureData);
-						}
-						break;
-				}
-				break;
+			
 			// check for Click
 			case Gestures.Click:
 				switch (gestureData.state)

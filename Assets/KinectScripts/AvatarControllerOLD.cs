@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 using System;
 using System.Collections;
@@ -9,7 +9,8 @@ using System.Text;
 
 
 [RequireComponent(typeof(Animator))]
-public class AvatarController : MonoBehaviour {
+public class AvatarControllerOLD : MonoBehaviour
+{
 	// Bool that has the characters (facing the player) actions become mirrored. Default false.
 	public bool mirroredMovement = false;
 
@@ -288,8 +289,7 @@ public class AvatarController : MonoBehaviour {
 
 		// Smoothly transition to the new position
 		// Move the avatar left, right, up, or down depending on whether tilt and/or flapping gestures are captured
-		//Vector3 trans = bodyRoot.localPosition;
-		Vector3 trans = transform.localPosition;
+		Vector3 trans = bodyRoot.localPosition;
 		trans += (tiltLeft) ? new Vector3(-Constants.CHARACTER_TILT_SPEED, 0, 0) : new Vector3(0, 0, 0);
 		trans += (tiltRight) ? new Vector3(Constants.CHARACTER_TILT_SPEED, 0, 0) : new Vector3(0, 0, 0);
 		float deltaY = 0;
@@ -303,17 +303,13 @@ public class AvatarController : MonoBehaviour {
 			deltaY = Constants.CHARACTER_FLAP_SPEED;
 		}
 		trans += new Vector3(0, deltaY, 0);
-		transform.localPosition = trans;
 
-		// Previously used for humanoid, not application to bird
-		//trans += bodyRoot.localPosition;
+		Vector3 targetPos = Kinect2AvatarPos(trans, verticalMovement);
 
-		//Vector3 targetPos = Kinect2AvatarPos(trans, verticalMovement);
-
-		//if (smoothFactor != 0f)
-		//	bodyRoot.localPosition = Vector3.Lerp(bodyRoot.localPosition, targetPos, smoothFactor * Time.deltaTime);
-		//else
-		//	bodyRoot.localPosition = targetPos;
+		if (smoothFactor != 0f)
+			bodyRoot.localPosition = Vector3.Lerp(bodyRoot.localPosition, targetPos, smoothFactor * Time.deltaTime);
+		else
+			bodyRoot.localPosition = targetPos;
 	}
 
 	// If the bones to be mapped have been declared, map that bone to the model.
