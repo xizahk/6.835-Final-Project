@@ -22,9 +22,9 @@ public class Constants : MonoBehaviour
     public const float CHARACTER_FALL_SPEED = 1f;
 
     // UI TEXT
-    public static readonly string PlayerTag = "Player";
-    public static readonly string StatusFlapToStart = "Flap to start";
-    public static readonly string StatusDeadFlapToStart = "Dead. Flap to start";
+    public static readonly string PLAYER_TAG = "Player";
+    public static readonly string STATUS_MENU = "At the menu, flap to start.";
+    public static readonly string STATUS_DEAD = "Dead. Flap to return to menu.";
 
     // MAP
     public const int STARTING_PATH = 3;

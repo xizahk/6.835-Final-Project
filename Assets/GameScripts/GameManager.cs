@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     
     public void Die()
     {
-            UIManager.Instance.SetStatus(Constants.StatusDeadFlapToStart);
+            UIManager.Instance.SetStatus(Constants.STATUS_DEAD);
             this.GameState = GameState.Dead; 
     }
 }

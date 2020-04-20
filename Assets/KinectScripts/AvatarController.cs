@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 using System;
 using System.Collections;
@@ -25,6 +26,8 @@ public class AvatarController : MonoBehaviour {
 	// Whether the offset node must be repositioned to the user's coordinates, as reported by the sensor or not.
 	public bool offsetRelativeToSensor = false;
 
+	// debug text with avatar local position
+	public Text localPositionText;
 
 	// The body root node
 	protected Transform bodyRoot;
@@ -49,7 +52,6 @@ public class AvatarController : MonoBehaviour {
 
 	// private instance of the KinectManager
 	protected KinectManager kinectManager;
-
 
 	// transform caching gives performance boost since Unity calls GetComponent<Transform>() each time you call transform 
 	private Transform _transformCache;
@@ -289,21 +291,25 @@ public class AvatarController : MonoBehaviour {
 		// Smoothly transition to the new position
 		// Move the avatar left, right, up, or down depending on whether tilt and/or flapping gestures are captured
 		//Vector3 trans = bodyRoot.localPosition;
-		Vector3 trans = transform.localPosition;
+		Vector3 trans = new Vector3(0, 0, 0);
 		trans += (tiltLeft) ? new Vector3(-Constants.CHARACTER_TILT_SPEED, 0, 0) : new Vector3(0, 0, 0);
 		trans += (tiltRight) ? new Vector3(Constants.CHARACTER_TILT_SPEED, 0, 0) : new Vector3(0, 0, 0);
 		float deltaY = 0;
-		if (!flap && trans[1] > 0)
+		if (!flap && transform.localPosition[1] > 0)
 		{
 			// Make player fall down slowly
-			deltaY = -Math.Min(trans[1], Constants.CHARACTER_FALL_SPEED * Time.deltaTime);
+			deltaY = -Math.Min(transform.localPosition[1], Constants.CHARACTER_FALL_SPEED * Time.deltaTime);
 		}
 		else if (flap && trans[1] < Constants.CHARACTER_MAX_HEIGHT)
 		{
 			deltaY = Constants.CHARACTER_FLAP_SPEED;
 		}
 		trans += new Vector3(0, deltaY, 0);
-		transform.localPosition = trans;
+		transform.localPosition += trans;
+		if (localPositionText != null)
+		{
+			localPositionText.text = "Local position: " + transform.localPosition.ToString();
+		}
 
 		// Previously used for humanoid, not application to bird
 		//trans += bodyRoot.localPosition;

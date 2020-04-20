@@ -57,7 +57,7 @@ public class UIManager : MonoBehaviour
     
     private void UpdateScoreText()
     {
-        ScoreText.text = score.ToString();
+        ScoreText.text = "Score: " + score.ToString();
     }
 
     public void SetStatus(string text)

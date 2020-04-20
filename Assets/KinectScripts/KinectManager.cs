@@ -1177,7 +1177,6 @@ public class KinectManager : MonoBehaviour
 				{
 					//if(controller.Active)
 					{
-						Debug.Log(Player1Avatars.Count);
 						controller.UpdateAvatar(Player1ID);
 					}
 				}
@@ -1861,21 +1860,17 @@ public class KinectManager : MonoBehaviour
 					// check for gestures
 					if(Time.realtimeSinceStartup >= gestureTrackingAtTime[0])
 					{
-						Debug.Log("Checking for list gestures size");
 						int listGestureSize = player1Gestures.Count;
 						float timestampNow = Time.realtimeSinceStartup;
 						string sDebugGestures = string.Empty;  // "Tracked Gestures:\n";
-						Debug.Log("List gesture size " + listGestureSize.ToString());
 
 						for (int g = 0; g < listGestureSize; g++)
 						{
-							Debug.Log("Looking at gesture data");
 							KinectGestures.GestureData gestureData = player1Gestures[g];
 							
 							if((timestampNow >= gestureData.startTrackingAtTime) && 
 								!IsConflictingGestureInProgress(gestureData))
 							{
-								Debug.Log("Checking for gestures");
 								KinectGestures.CheckForGesture(userId, ref gestureData, Time.realtimeSinceStartup, 
 									ref player1JointsPos, ref player1JointsTracked);
 								player1Gestures[g] = gestureData;

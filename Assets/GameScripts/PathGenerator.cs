@@ -14,7 +14,7 @@ public class PathGenerator : MonoBehaviour {
     void OnTriggerEnter(Collider hit)
     {
         //player has hit the collider
-        if (hit.gameObject.tag == Constants.PlayerTag)
+        if (hit.gameObject.tag == Constants.PLAYER_TAG)
         {
             Instantiate(Path, PathSpawnPoints[0].position, PathSpawnPoints[0].rotation);
         }

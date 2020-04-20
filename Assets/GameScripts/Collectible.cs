@@ -11,8 +11,11 @@ public class Collectible : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        UIManager.Instance.IncreaseScore(ScorePoints);
-        Destroy(this.gameObject);
+        if (col.gameObject.tag == Constants.PLAYER_TAG)
+        {
+            UIManager.Instance.IncreaseScore(ScorePoints);
+            Destroy(this.gameObject);
+        }
     }
 
     public int ScorePoints = 1;
