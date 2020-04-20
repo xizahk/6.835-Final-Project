@@ -40,6 +40,10 @@ public class ObjectGenerator : MonoBehaviour
     {
         if (prefab.name.Contains("Sphere")) {
             position += new Vector3(0, Random.Range(Constants.COLLECTIBLE_MIN_Y, Constants.COLLECTIBLE_MAX_Y), 0);
+        } 
+        else if (prefab.name.Contains("GreenPipe"))
+        {
+            position += new Vector3(0, Random.Range(Constants.COLLECTIBLE_MIN_Y, Constants.COLLECTIBLE_MAX_Y), 0);
         }
         Instantiate(prefab, position, Quaternion.identity);
     }

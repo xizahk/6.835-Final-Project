@@ -26,10 +26,11 @@ public class Constants : MonoBehaviour
     public static readonly string STATUS_MENU = "At the menu, flap to start.";
     public static readonly string STATUS_DEAD = "Dead. Flap to return to menu.";
 
-    // MAP
-    public const int STARTING_PATH = 3;
-
     // COLLECTIBLES
     public const float COLLECTIBLE_MIN_Y = 1f;
     public const float COLLECTIBLE_MAX_Y = 3f;
+
+    // OBSTACLES
+    public const float OBSTACLE_MIN_Y = 1f;
+    public const float OBSTACLE_MAX_Y = 3f;
 }

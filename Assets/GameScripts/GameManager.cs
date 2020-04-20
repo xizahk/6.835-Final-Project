@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     protected GameManager()
     {
-        GameState = GameState.Start;
+        GameState = GameState.Menu;
     }
 
     public GameState GameState { get; set; }
