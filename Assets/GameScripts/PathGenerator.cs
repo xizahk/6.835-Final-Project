@@ -8,7 +8,7 @@ public class PathGenerator : MonoBehaviour {
 
     void Start()
     {
-        Instantiate(Path, PathSpawnPoints[0].position, PathSpawnPoints[0].rotation);
+
     }
 
     void OnTriggerEnter(Collider hit)
