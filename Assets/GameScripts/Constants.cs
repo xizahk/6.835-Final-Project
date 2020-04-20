@@ -24,4 +24,11 @@ public class Constants : MonoBehaviour
     public static readonly string PlayerTag = "Player";
     public static readonly string StatusFlapToStart = "Flap to start";
     public static readonly string StatusDeadFlapToStart = "Dead. Flap to start";
+
+    // MAP
+    public const int STARTING_PATH = 3;
+
+    // COLLECTIBLES
+    public const float COLLECTIBLE_MIN_Y = 1f;
+    public const float COLLECTIBLE_MAX_Y = 3f;
 }
