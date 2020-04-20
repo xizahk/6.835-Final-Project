@@ -8,8 +8,8 @@ public class Constants : MonoBehaviour
     // public const int NUMBER_OF_PLAYERS = 4;
 
     // KINECT GESTURE DETECTION THRESHOLDS
-    public const float FLAP_UP= 0.2f;
-    public const float FLAP_DOWN = 0.3f;
+    public const float FLAP_UP= 0.15f;
+    public const float FLAP_DOWN = 0.2f;
 
     // SCREEN
     public const int SCREEN_HEIGHT = 1000;
