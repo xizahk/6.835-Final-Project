@@ -18,6 +18,10 @@ public class ObjectGenerator : MonoBehaviour
             //select a random spawn point, apart from the first one
             //since we do not want an obstacle there
             obstacleIndex = Random.Range(1, SpawnPoints.Length);
+            if (obstacleIndex >= SpawnPoints.Length)
+            {
+                Debug.Log("Index is too big!\nLength: " + SpawnPoints.Length.ToString() + "index" + obstacleIndex.ToString());
+            }
             CreateObject(SpawnPoints[obstacleIndex].position, Obstacles[Random.Range(0, Obstacles.Length)]);
         }
 

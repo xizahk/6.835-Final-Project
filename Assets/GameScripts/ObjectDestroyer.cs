@@ -17,5 +17,5 @@ public class ObjectDestroyer : MonoBehaviour
     }
 
 
-    public float LifeTime = 10f;
+    public float LifeTime = 1f;
 }

@@ -12,6 +12,7 @@ public class Constants : MonoBehaviour
     public const float FLAP_DOWN = 0.2f;
 
     // SCREEN
+    public const float CAMERA_GAME_LEVEL_SPEED = 2f;
     public const int SCREEN_HEIGHT = 1000;
 
     // CHARACTER
