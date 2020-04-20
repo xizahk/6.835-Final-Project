@@ -14,6 +14,7 @@ public class SimpleGestureListener : MonoBehaviour, KinectGestures.GestureListen
 	
 	public void UserDetected(uint userId, int userIndex)
 	{
+		Debug.Log("User Detected: " + userId.ToString());
 		// as an example - detect these user specific gestures
 		KinectManager manager = KinectManager.Instance;
 
