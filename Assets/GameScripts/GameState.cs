@@ -1,7 +1,6 @@
 public enum GameState
 {
-    Menu,
-    Wait,
+    Start,
     Playing,
     Pause,
     Dead

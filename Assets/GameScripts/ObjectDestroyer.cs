@@ -3,12 +3,20 @@ using System.Collections;
 
 public class ObjectDestroyer : MonoBehaviour
 {
-
+    private bool isDeleted = false;
     void Start()
     {
-        Invoke("DestroyObject", LifeTime);
+        //Invoke("DestroyObject", LifeTime);
     }
 
+    private void Update()
+    {
+        if (GameManager.Instance.GameState == GameState.Playing && !isDeleted)
+        {
+            isDeleted = true;
+            Invoke("DestroyObject", LifeTime);
+        }
+    }
 
     void DestroyObject()
     {

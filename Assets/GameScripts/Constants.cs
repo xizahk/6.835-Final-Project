@@ -16,15 +16,18 @@ public class Constants : MonoBehaviour
     public const int SCREEN_HEIGHT = 1000;
 
     // CHARACTER
-    public const int CHARACTER_MAX_HEIGHT = SCREEN_HEIGHT;
+    public const float CHARACTER_MAX_HEIGHT = SCREEN_HEIGHT;
+    public const float CHARACTER_MIN_HEIGHT = 0.8f;
     public const float CHARACTER_TILT_SPEED = .5f;
     public const float CHARACTER_FLAP_SPEED = 1.5f;
     public const float CHARACTER_FALL_SPEED = 1f;
 
     // UI TEXT
     public static readonly string PLAYER_TAG = "Player";
-    public static readonly string STATUS_MENU = "At the menu, flap to start.";
-    public static readonly string STATUS_DEAD = "Dead. Flap to return to menu.";
+    public static readonly string STATUS_START = "Flap to start playing";
+    public static readonly string STATUS_PLAYING = "Playing";
+    public static readonly string STATUS_PAUSE = "NOT IMPLEMENTATION. Paused. Flap to continue.";
+    public static readonly string STATUS_DEAD = "Dead. Flap to return to start.";
 
     // COLLECTIBLES
     public const float COLLECTIBLE_MIN_Y = 1f;

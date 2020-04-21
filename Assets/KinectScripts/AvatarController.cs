@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 using System;
 
@@ -8,6 +9,8 @@ public class AvatarController : MonoBehaviour
 {
 	// private instance of the KinectManager
 	protected KinectManager kinectManager;
+
+	public Text LocalPositionText;
 
 	// transform caching gives performance boost since Unity calls GetComponent<Transform>() each time you call transform 
 	private Transform _transformCache;
@@ -24,7 +27,7 @@ public class AvatarController : MonoBehaviour
 
 	public void Awake()
 	{
-
+		LocalPositionText.text = "Position: " + transform.localPosition.ToString();
 	}
 
 	// Update the avatar each frame.
@@ -76,7 +79,7 @@ public class AvatarController : MonoBehaviour
 		trans += (tiltLeft) ? new Vector3(-Constants.CHARACTER_TILT_SPEED, 0, 0) : new Vector3(0, 0, 0);
 		trans += (tiltRight) ? new Vector3(Constants.CHARACTER_TILT_SPEED, 0, 0) : new Vector3(0, 0, 0);
 		float deltaY = 0;
-		if (!flap && transform.localPosition[1] > 0)
+		if (!flap && transform.localPosition[1] > Constants.CHARACTER_MIN_HEIGHT)
 		{
 			// Make player fall down slowly
 			deltaY = -Math.Min(transform.localPosition[1], Constants.CHARACTER_FALL_SPEED * Time.deltaTime);
@@ -87,5 +90,7 @@ public class AvatarController : MonoBehaviour
 		}
 		trans += new Vector3(0, deltaY, 0);
 		transform.localPosition += trans;
+
+		LocalPositionText.text = "Position: " + transform.localPosition.ToString();
 	}
 }

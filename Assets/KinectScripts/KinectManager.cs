@@ -1203,7 +1203,19 @@ public class KinectManager : MonoBehaviour
 						}
 						else if (gestureData.gesture == KinectGestures.Gestures.Flap)
 						{
-							flap = true;
+							if (GameManager.Instance.GameState == GameState.Start)
+							{
+								GameManager.Instance.StartPlaying();
+							} 
+							else if (GameManager.Instance.GameState == GameState.Dead)
+							{
+								GameManager.Instance.StartGame();
+							} 
+							else
+							{
+								Debug.Log("Getting here");
+								flap = true;
+							} 
                         }
 						foreach(KinectGestures.GestureListenerInterface listener in gestureListeners)
 						{
