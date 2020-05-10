@@ -1,6 +1,6 @@
 # 3D Flappy Bird
-Image of the game's menu:
 ![Image of game's menu](Images/game_menu.png)
+### Authors: Jessica Yang and Yanni Wang
 
 ## Demo Video
 [![](http://img.youtube.com/vi/JTtSeiw6p2Q/0.jpg)](http://www.youtube.com/watch?v=JTtSeiw6p2Q "Demo Video")
