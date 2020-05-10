@@ -1,5 +1,5 @@
 # 3D Flappy Bird
-Image of the game's menu.
+Image of the game's menu:
 ![Image of game's menu](Images/game_menu.png)
 
 ## Demo Video
