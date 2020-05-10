@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
 
     public void StartPlaying()
     {
+        UIManager.Instance.ResetScore();
         UIManager.Instance.SetStatus(Constants.STATUS_PLAYING);
         this.GameState = GameState.Playing;
     }

@@ -35,6 +35,7 @@ public class UIManager : MonoBehaviour
     }
 
     private float score = 0;
+    private float bestScore = 0;
 
 
     public void ResetScore()
@@ -52,12 +53,18 @@ public class UIManager : MonoBehaviour
     public void IncreaseScore(float value)
     {
         score += value;
+        if (score > bestScore) 
+        {
+            bestScore = score;
+        }
         UpdateScoreText();
     }
     
     private void UpdateScoreText()
     {
-        ScoreText.text = "Score: " + score.ToString();
+        // ScoreText.text = "Score: " + score.ToString();
+        ScoreText.text = score.ToString();
+        BestScoreText.text = bestScore.ToString();
     }
 
     public void SetStatus(string text)
@@ -65,6 +72,6 @@ public class UIManager : MonoBehaviour
         StatusText.text = text;
     }
 
-    public Text ScoreText, StatusText;
+    public Text ScoreText, StatusText, BestScoreText;
 
 }

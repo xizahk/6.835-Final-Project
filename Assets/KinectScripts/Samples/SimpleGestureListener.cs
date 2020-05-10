@@ -33,7 +33,7 @@ public class SimpleGestureListener : MonoBehaviour, KinectGestures.GestureListen
 
 		if (GestureInfo != null)
 		{
-			GestureInfo.text = "Tilt Left, tilt right, or flap.";
+			GestureInfo.text = "Tilt Left, Tilt Right, or Flap.";
 		}
 	}
 	

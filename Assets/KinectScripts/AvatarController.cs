@@ -10,7 +10,15 @@ public class AvatarController : MonoBehaviour
 	// private instance of the KinectManager
 	protected KinectManager kinectManager;
 
+	AudioSource _as;
+    public AudioClip soundEffect;
+
 	public Text LocalPositionText;
+
+	void Start()
+    {
+        _as = GetComponent<AudioSource>();
+    }
 
 	// transform caching gives performance boost since Unity calls GetComponent<Transform>() each time you call transform 
 	private Transform _transformCache;
@@ -76,17 +84,25 @@ public class AvatarController : MonoBehaviour
 		// Move the avatar left, right, up, or down depending on whether tilt and/or flapping gestures are captured
 		//Vector3 trans = bodyRoot.localPosition;
 		Vector3 trans = new Vector3(0, 0, 0);
-		trans += (tiltLeft) ? new Vector3(-Constants.CHARACTER_TILT_SPEED, 0, 0) : new Vector3(0, 0, 0);
-		trans += (tiltRight) ? new Vector3(Constants.CHARACTER_TILT_SPEED, 0, 0) : new Vector3(0, 0, 0);
+		// Move left or right only if player is within left/right bounds
+		if (tiltLeft && transform.localPosition[0] > Constants.CHARACTER_MAX_LEFT)
+		{
+			trans += new Vector3(-Constants.CHARACTER_TILT_SPEED, 0, 0);
+		}
+		if (tiltRight && transform.localPosition[0] < Constants.CHARACTER_MAX_RIGHT)
+		{
+			trans += new Vector3(Constants.CHARACTER_TILT_SPEED, 0, 0);
+		}
 		float deltaY = 0;
 		if (!flap && transform.localPosition[1] > Constants.CHARACTER_MIN_HEIGHT)
 		{
 			// Make player fall down slowly
 			deltaY = -Math.Min(transform.localPosition[1], Constants.CHARACTER_FALL_SPEED * Time.deltaTime);
 		}
-		else if (flap && trans[1] < Constants.CHARACTER_MAX_HEIGHT)
+		else if (flap && transform.localPosition[1] < Constants.CHARACTER_MAX_HEIGHT)
 		{
 			deltaY = Constants.CHARACTER_FLAP_SPEED;
+			_as.PlayOneShot(soundEffect);
 		}
 		trans += new Vector3(0, deltaY, 0);
 		transform.localPosition += trans;

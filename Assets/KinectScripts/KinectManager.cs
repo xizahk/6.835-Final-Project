@@ -1209,11 +1209,10 @@ public class KinectManager : MonoBehaviour
 							} 
 							else if (GameManager.Instance.GameState == GameState.Dead)
 							{
-								GameManager.Instance.StartGame();
+								GameManager.Instance.StartPlaying();
 							} 
 							else
 							{
-								Debug.Log("Getting here");
 								flap = true;
 							} 
                         }

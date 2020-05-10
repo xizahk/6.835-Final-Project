@@ -3,6 +3,7 @@ using System.Collections;
 
 public class ObjectDestroyer : MonoBehaviour
 {
+    public float LifeTime = 30f;
     private bool isDeleted = false;
     void Start()
     {
@@ -25,5 +26,4 @@ public class ObjectDestroyer : MonoBehaviour
     }
 
 
-    public float LifeTime = 10f;
 }

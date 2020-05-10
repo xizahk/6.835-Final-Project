@@ -3,21 +3,23 @@ using System.Collections;
 
 public class Collectible : MonoBehaviour
 {
-    // Update is called once per frame
-    void Update()
+    AudioSource _as;
+    public AudioClip soundEffect;
+    public int ScorePoints = 1;
+
+    void Start()
     {
-        transform.Rotate(Vector3.up, Time.deltaTime * rotateSpeed);
+        _as = GetComponent<AudioSource>();
     }
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == Constants.PLAYER_TAG)
+        if (col.gameObject.tag == Constants.PLAYER_TAG && GameManager.Instance.GameState == GameState.Playing)
         {
+            _as.PlayOneShot(soundEffect);
             UIManager.Instance.IncreaseScore(ScorePoints);
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
+            transform.position = new Vector3(0, -100, 0);
         }
     }
-
-    public int ScorePoints = 1;
-    public float rotateSpeed = 50f;
 }
