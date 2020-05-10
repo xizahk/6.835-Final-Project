@@ -1,6 +1,9 @@
 # 3D Flappy Bird
 ![Image of game's menu](Images/game_menu.png)
 
+## Demo Video
+[![](http://img.youtube.com/vi/JTtSeiw6p2Q/0.jpg)](http://www.youtube.com/watch?v=JTtSeiw6p2Q "Demo Video")
+
 # Table of Contents
 ## Assets
 This folder contains most files that are used in the game, including 3D assets, files for gesture recognition, and files that facilitate game logic.
