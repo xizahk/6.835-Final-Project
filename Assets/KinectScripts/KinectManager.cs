@@ -1188,10 +1188,10 @@ public class KinectManager : MonoBehaviour
 					{
 						if(gestureData.gesture == KinectGestures.Gestures.Click)
 						{
-							if(ControlMouseCursor)
-							{
-								MouseControl.MouseClick();
-							}
+							// if(ControlMouseCursor)
+							// {
+							// 	MouseControl.MouseClick();
+							// }
 						} 
 						else if (gestureData.gesture == KinectGestures.Gestures.TiltLeft)
 						{
@@ -1263,7 +1263,7 @@ public class KinectManager : MonoBehaviour
 								{
 									Vector3 vCursorPos = HandCursor1.GetComponent<RawImage>() != null ? HandCursor1.transform.position :
 										Camera.main.WorldToViewportPoint(HandCursor1.transform.position);
-									MouseControl.MouseMove(vCursorPos, CalibrationText);
+									// MouseControl.MouseMove(vCursorPos, CalibrationText);
 								}
 							}
 						}
@@ -1295,10 +1295,10 @@ public class KinectManager : MonoBehaviour
 					{
 						if(gestureData.gesture == KinectGestures.Gestures.Click)
 						{
-							if(ControlMouseCursor)
-							{
-								MouseControl.MouseClick();
-							}
+							// if(ControlMouseCursor)
+							// {
+							// 	MouseControl.MouseClick();
+							// }
 						}
 						
 						foreach(KinectGestures.GestureListenerInterface listener in gestureListeners)
@@ -1348,7 +1348,7 @@ public class KinectManager : MonoBehaviour
 								{
 									Vector3 vCursorPos = HandCursor2.GetComponent<RawImage>() != null ? HandCursor2.transform.position :
 										Camera.main.WorldToViewportPoint(HandCursor2.transform.position);
-									MouseControl.MouseMove(vCursorPos, CalibrationText);
+									// MouseControl.MouseMove(vCursorPos, CalibrationText);
 								}
 							}
 						}
